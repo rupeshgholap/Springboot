@@ -1,5 +1,6 @@
 package com.example.employee_crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -16,7 +17,8 @@ public class Project {
     @Column
     private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "projects")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "projects",fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Employee> employees = new ArrayList<>();
 
     public Project()

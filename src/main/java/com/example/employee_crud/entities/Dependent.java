@@ -18,7 +18,7 @@ public class Dependent {
     @Column
     private String reletion;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Employee employee;
 
     public Dependent() {

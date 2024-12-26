@@ -1,5 +1,6 @@
 package com.example.employee_crud.controllers;
 
+import com.example.employee_crud.entities.Dependent;
 import com.example.employee_crud.entities.Employee;
 import com.example.employee_crud.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +47,9 @@ public class EmployeeController {
         return employeeService.findByDepartment(department);
     }
 
+    @GetMapping("/{id}/dependents")
+    public List<Dependent> getDependent(@PathVariable int id)
+    {
+        return employeeService.findDependent(id);
+    }
 }

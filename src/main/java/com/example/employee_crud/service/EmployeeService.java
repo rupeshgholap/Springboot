@@ -1,5 +1,6 @@
 package com.example.employee_crud.service;
 
+import com.example.employee_crud.entities.Dependent;
 import com.example.employee_crud.entities.Employee;
 import com.example.employee_crud.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class EmployeeService {
     public List<Employee> findByDepartment(String department)
     {
         return employeeRepository.findByDepartment(department);
+    }
+
+    public List<Dependent> findDependent(int id)
+    {
+        return employeeRepository.dependentById(id);
     }
 
 }

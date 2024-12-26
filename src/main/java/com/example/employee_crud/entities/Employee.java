@@ -1,5 +1,6 @@
 package com.example.employee_crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class Employee {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "employee_projects")
+    @JsonManagedReference
     private List<Project> projects = new ArrayList<>();
 
     public Employee()
