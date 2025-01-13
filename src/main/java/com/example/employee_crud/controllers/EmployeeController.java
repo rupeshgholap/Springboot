@@ -4,13 +4,13 @@ import com.example.employee_crud.entities.Dependent;
 import com.example.employee_crud.entities.Employee;
 import com.example.employee_crud.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/employees")
 public class EmployeeController {
 
     @Autowired
@@ -23,33 +23,54 @@ public class EmployeeController {
         return employeeService.saveEmployee(employee);
     }
 
-    @GetMapping
+    @GetMapping("/employees/all")
     public List<Employee> getAllEmployee()
     {
         return  employeeService.getEmployee();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/employees/{id}")
     public Optional<Employee> EmployeeID(@PathVariable int id)
     {
         return employeeService.getById(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/employees/{id}")
     public void Delete(@PathVariable int id)
     {
         employeeService.DeleteByID(id);
     }
 
-    @GetMapping("/department/{department}")
+    @GetMapping("/employees/department/{department}")
     public List<Employee> getBYDepartment(@PathVariable String department)
     {
         return employeeService.findByDepartment(department);
     }
 
-    @GetMapping("/{id}/dependents")
+    @GetMapping("/employees/{id}/dependents")
     public List<Dependent> getDependent(@PathVariable int id)
     {
         return employeeService.findDependent(id);
+    }
+
+    @GetMapping("/employees/hello")
+    public String hello()
+    {
+        return "hello consumer from employee project ";
+    }
+
+    @GetMapping("/user")
+    @PreAuthorize("hasAuthority('user')")
+    public String userHello()
+    {
+        return "Access granted to user";
+    }
+
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasAuthority('admin')")
+    public String adminHello()
+    {
+        return "Access granted to admin";
     }
 }
